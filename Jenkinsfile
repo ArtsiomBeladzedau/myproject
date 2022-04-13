@@ -13,27 +13,27 @@ pipeline {
                 git branch: 'master', url: 'https://github.com/ArtsiomBeladzedau/myproject.git'
             }
         }
-        stage("Start CMS") {
+        stage("Start Wordpress") {
             steps {
                 sh '''
-                rm -rf /home/belhard/demo
-                cp -pr /home/belhard/workspace/myproject/Viktor_Bri/XX.Final_Project/demo /home/belhard/
-                /home/belhard/demo/start_web.sh
+                rm -rf /home/belhard/show
+                cp -pr /home/belhard/project/show /home/belhard/
+                /home/belhard/show/wordpress.sh
                 '''
             }
         }
     }
     post { 
         unsuccessful { 
-                    sh '''cd /home/belhard/workspace/myproject/ && git config --global user.email "you@example.com" && git config --global user.name "ViktorB" && git revert HEAD'''
+                    sh '''cd /home/belhard/project/ && git config --global user.email "you@example.com" && git config --global user.name "ArtsiomBeladzedau" && git revert HEAD'''
                     sh '''
-                      rm -rf /home/belhard/demo
-                      cp -pr /home/belhard/workspace/myproject/Viktor_Brile/XX.Final_Project/demo /home/belhard/
-                      /home/belhard/demo/start_web.sh
+                      rm -rf /home/belhard/show
+                      cp -pr /home/belhard/project/show /home/belhard/
+                      /home/belhard/show/wordpress.sh
                     '''    
-                    sh """
-                     curl -X POST https://api.telegram.org/bot5225721637:AAGxHahiWY-ZW022mgtoLsMNJS6CjoFCT6o/sendMessage -d "chat_id=1108837141" -d text="Job Jenkins unsuccessful & revert Git"
-                    """
+                    /sh """
+                   /  curl -X POST https://api.telegram.org/bot5225721637:AAGxHahiWY-ZW022mgtoLsMNJS6CjoFCT6o/sendMessage -d "chat_id=1108837141" -d text="Job Jenkins unsuccessful & revert Git"
+                   / """
                     }
               // cleanWs()
                 }
