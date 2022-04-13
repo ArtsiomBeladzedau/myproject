@@ -1,0 +1,67 @@
+---
+
+- name: Setting up our VMs
+  gather_facts: true
+  hosts: ansible-1
+  become: yes
+
+  tasks:
+
+    - name: создаем директорию wordpress
+      file:
+        path: /home/vagrant/project_wordpresscms
+        state: directory
+        owner: vagrant
+        group: vagrant
+      become: yes
+
+    - name: удаляем каталог
+      become_user: vagrant
+      shell: sudo rm -rf ~/project_wordpresscms/*
+
+    - name: удаляем файлы 
+      become_user: vagrant
+      shell: sudo rm -rf ~/volumes/
+
+
+    - name: копируем файл для докер-компоузера 
+      become_user: vagrant
+      ansible.builtin.copy:
+        src: /home/belhard/wordpresscms/docker-compose.yml
+        dest: /home/vagrant/project_wordpresscms/docker-compose.yml
+        owner: vagrant
+        group: vagrant
+        mode: u=rwx,g=rx,o=r
+
+    - name: создаем каталог для бэкапа
+      file:
+        path: /home/vagrant/project_wordpresscms/backup
+        state: directory
+        owner: vagrant
+        group: vagrant
+      become: yes
+
+
+    - name: остановка запущенных контейнеров и удаление имиджей
+      become_user: vagrant
+      shell: "cd ~/project_wordpresscms && sudo docker-compose down && docker rmi $(docker images -q) -f"
+
+    - name: поднимаем базу данным марина
+      become_user: vagrant
+      shell: "cd ~/project_wordpresscms && sudo docker-compose up -d db"
+
+    - name: поднимаем wordpress
+      become_user: vagrant
+      shell: "cd ~/project_wordpresscms && sudo docker-compose up -d wordpress"
+
+    - name: назначаем права на папки
+      become_user: vagrant
+      shell: "cd ~/project_wordpresscms && \
+        sudo docker-compose exec wordpress chown -R www-data /var/www/html/plugins &&\
+        sudo docker-compose exec wordpress chown -R www-data /var/www/html/storage/app &&\
+        sudo docker-compose exec wordpress chown -R www-data /var/www/html/storage/logs &&\
+        sudo docker-compose exec wordpress chown -R www-data /var/www/html/themes"
+    
+    - name: делаем бэкап базы данных
+      become_user: vagrant
+      shell: 'cd ~/project_wordpresscms && sudo docker-compose exec db mysqldump -u wordpress --password="wordpress" --all-databases > /home/vagrant/project_wordpresscms/backup/mydata-backup.sql'
