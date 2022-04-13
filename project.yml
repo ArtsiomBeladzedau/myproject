@@ -27,7 +27,7 @@
     - name: копируем файл для докер-компоузера 
       become_user: vagrant
       ansible.builtin.copy:
-        src: /home/belhard/wordpresscms/docker-compose.yml
+        src: /home/belhard/project/docker-compose.yml
         dest: /home/vagrant/project_wordpresscms/docker-compose.yml
         owner: vagrant
         group: vagrant

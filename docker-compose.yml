@@ -1,0 +1,32 @@
+ version: '2.2'
+ services:
+   wordpress:
+    container_name: wordpress
+    image: wordpress:latest
+    restart: always
+    ports:
+      - 8200:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - $HOME/project_wordpresscms/plugins:/var/www/html/plugins
+      - $HOME/project_wordpresscms/storage/app:/var/www/html/storage/app
+      - $HOME/project_wordpresscms/storage/logs:/var/www/html/storage/logs
+      - $HOME/project_wordpresscms/themes:/var/www/html/themes
+
+
+   db:
+    image: mariadb
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+    volumes:
+     - $HOME/project_wordpresscms/volumes/mysql/data:/var/lib/mysql
