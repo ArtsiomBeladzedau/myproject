@@ -17,25 +17,26 @@ pipeline {
             steps {
                 sh '''
                 rm -rf /home/belhard/show
-                cp -pr /home/belhard/project/show /home/belhard/
-                /home/belhard/show/wordpress.sh
+                pwd
+                cp -prf /var/lib/jenkins/workspace/mytest/show /home/belhard/test
+                cd /home/belhard/test/show
+                ./wordpress.sh
                 '''
             }
         }
     }
     post { 
         unsuccessful { 
-                    sh '''cd /home/belhard/project/ && git config --global user.email "you@example.com" && git config --global user.name "ArtsiomBeladzedau" && git revert HEAD'''
+                    sh '''cd /home/belhard/test/ && git config --global user.email "you@example.com" && git config --global user.name "ArtsiomBeladzedau" && git revert HEAD'''
                     sh '''
-                      rm -rf /home/belhard/show
-                      cp -pr /home/belhard/project/show /home/belhard/
-                      /home/belhard/show/wordpress.sh
+                      cp -prf /var/lib/jenkins/workspace/mytest/show /home/belhard/test
+                      cd /home/belhard/test/show
+                      ./wordpress.sh
                     '''    
-                    /sh """
-                   /  curl -X POST https://api.telegram.org/bot5225721637:AAGxHahiWY-ZW022mgtoLsMNJS6CjoFCT6o/sendMessage -d "chat_id=1108837141" -d text="Job Jenkins unsuccessful & revert Git"
-                   / """
+                    sh """
+                     curl -X POST https://api.telegram.org/bot5225721637:AAGxHahiWY-ZW022mgtoLsMNJS6CjoFCT6o/sendMessage -d "chat_id=1108837141" -d text="Job Jenkins unsuccessful & revert Git"
+                    """
                     }
-              // cleanWs()
-                }
-           
+             // добавить удаление воркспейса!!
     }    
+}
