@@ -43,6 +43,3 @@
 ## db-[99:101]-node.example.com
 [db]
 ansible-1 ansible_ssh_host=10.0.2.8 ansible_ssh_user=vagrant
-
-[web]
-ansible-2 ansible_ssh_host=10.0.2.9 ansible_ssh_user=vagrant
