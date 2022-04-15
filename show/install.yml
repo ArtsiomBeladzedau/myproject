@@ -20,6 +20,7 @@
         dest: "/home/belhard/.ssh/authorized_keys"
         content:
           ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC50NttWQwpo591+xEB5Hm1Xvih/TcJBSrdEmoEFBjZ9HGVzgEqYZNJagf2R43ODhC9LT9bHCKag+eCighpNQ/Wz5CpeEpU3VPuH8d71cfKXc6nBHS9JkQeNI0Aze+joRyUxDAOt6XA6+HkV+SkVFtjEWaccsGGtZWkmSvOb/sie1b9TdoM6SeMSDxSloszQZCAHioh31gIHV4HPz+WAofbxKwgWUgCzNl7gYMO+bTNZlDG4ea3S/W4t3giVKcD6HvR7NiQXzIlfsGuADWudBPsF6d2ziF+2nQiImVuacBBJJg0mQPSLN9bStrymFKvwRS0Oz09ZO1s/x51NPTfOlwupjSFtWQDUm5N+BcBhkx5aG400fShNrF55RjgWdsRLBoSNutOscVTje4ixH+DQVyzOHKnYPSyEplapFkDL4HbDqYliRGOkDT00RKX3OTOnKUCRZlQZU4zddk8wwFgi6NO8YChUn3AwUg9URmk3Wsc8LyC0HyvjRLZRlD/zlsQ3uU= belhard@belhard-X507UB
+          ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCxm+x1uDvifKdlM5hIXX6sgpv/7ocnArEnQvtbYOOOufugMdZYeW1zVbz+Gs3awqeyU6sjp2V6FG6CG/xG1rt0R9ILEkt9bD3ftiF1aZS7Jfhwpc8LRnvLHpVuqV9E7+5W2jzny4qJxRfS7rAWCHph+bmWRngUPX0bX0Vmd8sedsUP9sqXWmaivRkley9lgSCuccp2j28bbYVp7TF8tveoaLOBVry70luzLcFtp5SY+qqh0VuMiP+JtDlYW9sRdqtMdRPv4YjorN+Y92lVGYYRkNaqqdVhUSWhisJRErjWIswd+abduYUs6Li15x7I8o1dAX0Ki/qXRSfNHJ/nMdh2OuaNNKxb1KotJVdztDNDCAAifztb2fEhde7PF59cH+vhvwiO7GXpHyoj+HU5/5ySkxu8oKgouWUH+StT4MgVVJfyMtO36CzIWRRGYKZDLNJGNb2U9Cf+trX2Uw8QH7bFXS5b5LozltGZA50mM0nMK+UpljnkKthi7OJiE5+3RGU= jenkins@new
       become: yes
     
     - name: install java
