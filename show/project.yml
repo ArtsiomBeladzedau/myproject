@@ -44,7 +44,7 @@
 
     - name: остановка запущенных контейнеров и удаление имиджей
       become_user: vagrant
-      shell: "cd ~/project_wordpresscms && sudo docker-compose down && docker rmi $(docker images -q) -f"
+      shell: "cd ~/project_wordpresscms && sudo docker stop $(docker ps -a -q) && sudo docker rm $(docker ps -a -q) && sudo docker rmi $(docker images -q)"
 
     - name: поднимаем базу данным марина
       become_user: vagrant
