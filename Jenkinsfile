@@ -27,7 +27,7 @@ pipeline {
     }
     post { 
         unsuccessful { 
-                    sh '''cd /home/belhard/test/ && git config --global user.email "you@example.com" && git config --global user.name "ArtsiomBeladzedau" && git revert HEAD'''
+                    sh '''cd /home/belhard/myproject/show && git config --global user.email "you@example.com" && git config --global user.name "ArtsiomBeladzedau" && git revert HEAD'''
                     sh '''
                       cp -prf /var/lib/jenkins/workspace/mytest/show /home/belhard/test
                       cd /home/belhard/test/show
