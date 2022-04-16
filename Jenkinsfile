@@ -21,6 +21,10 @@ pipeline {
                 cd /home/belhard/test/show
                 ./wordpress.sh
                 '''
+                sh """
+                 curl -X POST https://api.telegram.org/bot{$TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d text="Job Jenkins successful"
+                """
+
             }
         }
     }
