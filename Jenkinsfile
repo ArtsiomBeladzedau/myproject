@@ -37,6 +37,7 @@ pipeline {
                       cd /home/belhard/test/show
                       ./wordpress.sh
                     '''    
+                //
                 //    sh """
                 //     curl -X POST https://api.telegram.org/bot5225721637:AAGxHahiWY-ZW022mgtoLsMNJS6CjoFCT6o/sendMessage -d "chat_id=1108837141" -d text="Job Jenkins unsuccessful & revert Git"
                 //    """
