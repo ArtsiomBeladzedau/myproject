@@ -2,7 +2,7 @@
 
 - name: Setting up our VMs
   gather_facts: true
-  hosts: ansible-2
+  hosts: ansible-1
   become: yes
 
   tasks:
