@@ -15,16 +15,17 @@ pipeline {
         }
         stage("Start Wordpress") {
             steps {
+                withCredentials([string(credentialsId: 'telegasec', variable: 'TOKEN')]) {
                 sh '''
                 rm -rf /home/belhard/show
                 cp -prf /var/lib/jenkins/workspace/mytest/show /home/belhard/test
                 cd /home/belhard/test/show
                 ./wordpress.sh
                 '''
-                sh """
-                 curl -X POST https://api.telegram.org/bot{$TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d text="Job Jenkins successful"
+                sh '''
+                  curl -X POST https://api.telegram.org/bot{$TOKEN}/sendMessage -d "chat_id=1108837141" -d text="Job Jenkins successful"
                 """
-
+                }
             }
         }
     }
@@ -37,10 +38,9 @@ pipeline {
                       cd /home/belhard/test/show
                       ./wordpress.sh
                     '''    
-                //
-                //    sh """
-                //     curl -X POST https://api.telegram.org/bot5225721637:AAGxHahiWY-ZW022mgtoLsMNJS6CjoFCT6o/sendMessage -d "chat_id=1108837141" -d text="Job Jenkins unsuccessful & revert Git"
-                //    """
+                    sh '''
+                    curl -X POST https://api.telegram.org/bot{$TOKEN}/sendMessage -d "chat_id=1108837141" -d text="Job Jenkins unsuccessful"
+                    """
          }// добавить удаление ворспейса!!
          
          always {
